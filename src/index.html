@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Webpack Starter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <!--[if lte IE 9]>
+  <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+<![endif]-->
+
+  <h1>REDUX TODO APP</h1>
+
+  <fieldset>
+    <legend>Add a new task</legend>
+    <div id="add_task">
+      <input id='textInput' type="text" placeholder='Create a new task...'></input>
+      <input id='datePicker' type='date'>
+      <input id='addButton' type="button" value='ADD'>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Display filter</legend>
+    <div id="filter">
+      <input type="radio" name="filter" checked value="FILTER_ALL">All</input>
+      <input type="radio" name="filter" value="FILTER_COMPLETED">Completed</input>
+      <input type="radio" name="filter" value="FILTER_NOT_COMPLETED">Not Completed</input>
+      <input type="radio" name="filter" value="FILTER_DELAYED">Delayed</input>
+    </div>
+  </fieldset>
+
+  <div id="todos"></div>
+
+</body>
+
+</html>
