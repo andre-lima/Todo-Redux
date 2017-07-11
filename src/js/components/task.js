@@ -2,13 +2,14 @@ import { removeTask, toggleTaskCompleted } from '../actions/tasksActions';
 import store from '../store';
 
 export default class Task {
-  constructor(content, date = new Date()) {
+  constructor(content, date = (new Date())) {
     this.content = content;
-    this.id = 0;
+    this.id = (new Date()).getTime();
     this.dueDate = date;
     this.completed = false;
     this.completeTask = this.completeTask.bind(this);
     this.removeTask = this.removeTask.bind(this);
+    this.toHTML = this.toHTML.bind(this);
   }
 
   completeTask() {
@@ -19,7 +20,7 @@ export default class Task {
     store.dispatch(removeTask(this.id));
   }
 
-  toHTML() {
+  toHTML(isCompleted) {
     const todoContainer = document.createElement('div');
     todoContainer.classList.add('task');
 
@@ -33,7 +34,7 @@ export default class Task {
 
     const todoCheckCompleted = document.createElement('input');
     todoCheckCompleted.type = 'checkbox';
-    todoCheckCompleted.checked = this.completed;
+    todoCheckCompleted.checked = isCompleted;
     todoCheckCompleted.addEventListener('click', this.completeTask);
 
     const todoRemoveButton = document.createElement('input');

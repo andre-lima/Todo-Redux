@@ -10,7 +10,7 @@ function filterList(currentFilter, currentList) {
 
   switch (currentFilter) {
     case 'FILTER_ALL':
-      todoList = currentList;
+      todoList = [...currentList];
       break;
     case 'FILTER_COMPLETED':
       todoList = currentList.filter(todo => todo.completed);
@@ -34,7 +34,9 @@ function renderList(filteredList) {
   const todos = document.getElementById('todos');
   todos.innerHTML = '';
 
-  filteredList.forEach(todo => todos.appendChild(todo.toHTML()));
+  filteredList.forEach(todo => {
+    todos.appendChild(todo.toHTML(todo.completed));
+  });
 }
 
 // ADD TASK
