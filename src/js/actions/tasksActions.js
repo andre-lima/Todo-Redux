@@ -18,10 +18,3 @@ export function toggleTaskCompleted(id) {
     payload: id,
   };
 }
-
-export function setDisplayFilter(id) {
-  return {
-    type: 'SET_DISPLAY_FILTER',
-    payload: id,
-  };
-}

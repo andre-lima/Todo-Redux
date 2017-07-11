@@ -1,12 +1,11 @@
 import store from './store';
 
-import { addNewTask, setDisplayFilter } from './actions/tasksActions';
+import { addNewTask } from './actions/tasksActions';
+import { setDisplayFilter } from './actions/filterActions';
 import Task from './components/task';
 
-// Triggered when the store changes
-store.subscribe(() => {
-  const currentFilter = store.getState().tasks.displayFilter;
-  const currentList = store.getState().tasks.todoList;
+// FILTER LIST
+function filterList(currentFilter, currentList) {
   let todoList = [];
 
   switch (currentFilter) {
@@ -27,13 +26,16 @@ store.subscribe(() => {
     default:
       break;
   }
+  return todoList;
+}
 
+// RENDER TODO LIST
+function renderList(filteredList) {
   const todos = document.getElementById('todos');
   todos.innerHTML = '';
 
-  todoList.forEach(todo => todos.appendChild(todo.toHTML()));
-});
-
+  filteredList.forEach(todo => todos.appendChild(todo.toHTML()));
+}
 
 // ADD TASK
 const textInput = document.getElementById('textInput');
@@ -41,9 +43,10 @@ const addButton = document.getElementById('addButton');
 const datePicker = document.getElementById('datePicker');
 
 addButton.addEventListener('click', () => {
-  if(textInput.value !== '') {
+  if (textInput.value !== '') {
     const task = new Task(textInput.value, datePicker.value);
     store.dispatch(addNewTask(task));
+    textInput.value = '';
   } else {
     alert('You have to put a task description');
   }
@@ -55,4 +58,14 @@ document.getElementById('filter').addEventListener('click', (event) => {
   if (target.type === 'radio') {
     store.dispatch(setDisplayFilter(target.value));
   }
+});
+
+// Triggered when the store changes
+store.subscribe(() => {
+  const currentFilter = store.getState().visibilityFilter;
+  const currentList = store.getState().tasks.todoList;
+
+  const filteredList = filterList(currentFilter, currentList);
+
+  renderList(filteredList);
 });

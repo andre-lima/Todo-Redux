@@ -2,7 +2,6 @@ const INITIAL_STATE = {
   todoList: [],
   todosLength: 1,
   lastIdUsed: -1,
-  displayFilter: 'FILTER_ALL'
 };
 
 const tasksReducer = (state = INITIAL_STATE, action) => {
@@ -29,12 +28,6 @@ const tasksReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         todoList: newList
-      };
-    }
-    case 'SET_DISPLAY_FILTER': {
-      return {
-        ...state,
-        displayFilter: action.payload
       };
     }
     default:
